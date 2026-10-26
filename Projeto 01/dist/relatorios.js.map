@@ -1,0 +1,1 @@
+{"version":3,"file":"relatorios.js","sourceRoot":"","sources":["../src/relatorios.ts"],"names":[],"mappings":";;QASI,WAAW;AATf,SAAS,WAAW,CAAC,KAAa;IAC9B,IAAI,KAAK,CAAC,IAAI,EAAE,KAAK,EAAE,EAAE,CAAC;QACtB,OAAO,CAAC,GAAG,CAAC,oBAAoB,CAAC,CAAA;QACjC,OAAO,KAAK,CAAC;IACjB,CAAC;IACD,OAAO,IAAI,CAAA;AACf,CAAC"}

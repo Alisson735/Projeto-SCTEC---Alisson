@@ -1,5 +1,6 @@
 import type { cliente } from './types';
-declare function cadastrarCliente(cliente: cliente): void;
+declare function cadastrarCliente(): void;
 declare function verClientes(): cliente[];
-export { cadastrarCliente, verClientes };
+declare function procurarClienteId(id: number): cliente | undefined;
+export { cadastrarCliente, verClientes, procurarClienteId };
 //# sourceMappingURL=clientes.d.ts.map

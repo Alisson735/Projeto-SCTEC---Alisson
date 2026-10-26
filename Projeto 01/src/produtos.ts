@@ -1,6 +1,16 @@
 import type { produto } from "./types";
+import promptSync = require('prompt-sync');
+const prompt = promptSync({ sigint: true });
+import { validaTexto } from "./relatorios";
 
-export const produtos : produto[] = [
+
+
+
+
+
+
+
+const produtos : produto[] = [
     {
         nome: 'Mouse Gamer blueDragon',
         quantidade: 22,
@@ -42,15 +52,72 @@ export const produtos : produto[] = [
         idProduto: 6,
         preco: 125.00
      },
-
-
-
-
-
-
-
-
-
-
-
 ];
+
+function cadastrarProduto() {
+    const nomeDoProdutoInput: string = String(prompt('Digite o nome do produto '));
+    const idDoProdutoInput: number = Number(prompt('Digite o id do produto '));
+    const quantidadeDoProdutoInput:number = Number(prompt('Digite a quantidade do produto '));
+    const precoDoProdutoInput: number = Number(prompt('Digite o preco do produto '));
+
+    if (produtos.find((produto: produto) => {
+        return produto.idProduto === idDoProdutoInput
+    })) {
+        console.log('Já existe produto com esse ID')
+        return;
+    }
+
+    const novoProduto: produto = {
+        nome: nomeDoProdutoInput,
+        idProduto: idDoProdutoInput,
+        quantidade: quantidadeDoProdutoInput,
+       preco: precoDoProdutoInput,
+    }
+
+    adicionarProduto(novoProduto);
+}
+
+function adicionarProduto(produto: produto): boolean {
+    if (!validaTexto(produto.nome) || !validaTexto(produto.nome)) {
+        return false
+    }
+  
+
+    produtos.push(produto);
+    console.log('Produto cadastrado com sucesso');
+    return true;
+     
+    
+}
+
+
+function buscarProdutoPeloNome(nome: string) {
+  return produtos.filter((prod) => {
+    return prod.nome.toLowerCase().includes(nome.toLowerCase());
+  });
+}
+
+function removerProduto(): void {
+    const idInput: number = Number(prompt('Digite o id do qual você deseja excluir'));
+    const produtoIndex = produtos.findIndex((produto) => produto.idProduto === idInput);
+    produtos.splice(produtoIndex);
+    console.log('Produto removido com sucesso');
+}
+
+function buscarProdutoPeloPreco(preco: number): produto[] {
+    return produtos.filter((produto: produto) => {
+        return produto.preco <= preco
+    })
+}
+
+function listarProduto(): produto[] {
+    return produtos
+}
+
+export {
+    cadastrarProduto,
+    listarProduto,
+    buscarProdutoPeloNome,
+    buscarProdutoPeloPreco,
+    removerProduto
+}

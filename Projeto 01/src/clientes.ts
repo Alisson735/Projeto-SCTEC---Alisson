@@ -1,32 +1,45 @@
 import type { cliente } from './types'
+import promptSync = require('prompt-sync');
+const prompt = promptSync({ sigint: true });
 
- export const clientes : cliente [] = [
-    {nome:'Igor', email: 'Igor@gmail.com', id: 1
+const clientes: cliente[] = [];
 
-    },
 
-   {nome:'Vitor', email: 'Vitor@gmail.com', id: 2
+function cadastrarCliente(): void {
+const nomeInput = prompt('Digite nome do cliente');
+const emailInput = prompt('Digite o email do cliente');
+const idInput = Number(prompt('Digite o ID do cliente:'));
 
-   },
+const novoCliente: cliente = {
+    nome: nomeInput,
+    email: emailInput || '',
+    id: idInput,
+    }
 
-   {nome:'Fernanda', email: 'Fernanda@gmail.com', id: 3
-    
-   },
+ adicionarALista(novoCliente);
+}
 
-   {nome:'Gabriela', email: 'Gabriela@gmail.com', id: 4
-    
-   },
-];
-
-function cadastrarCliente (cliente:cliente) : void{
-clientes.push(cliente)
+function adicionarALista(cliente: cliente) {
+    if (cliente.nome === '') {
+        console.log('O nome do cliente deve ser preenchido!');
+        return false;
+    }
+ clientes.push(cliente);
+    console.log('Cliente cadastrado com sucesso');
+    return true;
 }
 
 function verClientes(): cliente[] {
     return clientes;
 }
 
+function procurarClienteId(id: number): cliente | undefined {
+    return clientes.find(cliente => cliente.id === id)
+}
+
 export {
     cadastrarCliente,
-    verClientes
+    verClientes,
+    procurarClienteId
 }
+
