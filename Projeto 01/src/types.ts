@@ -1,9 +1,12 @@
 export type cliente = {
-    nome: string,
-    idade: number
+    nome: string
+    email: string
+    id: number
 }
 
 export type produto = {
     nome: string,
-    quantidade: number,
+    quantidade: number
+    idProduto: number
+    preco: number
 }
