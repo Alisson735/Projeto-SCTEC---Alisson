@@ -7,6 +7,7 @@ const pedidos_1 = require("./pedidos");
 const prompt = promptSync({ sigint: true });
 let escolha = 0;
 do {
+    console.log('\n--- MENU ---');
     console.log('1 - Cadastrar cliente');
     console.log('2 - Ver clientes');
     console.log('3 - Cadastrar produto');
@@ -16,7 +17,7 @@ do {
     console.log('7 - Ver pedidos');
     console.log('8 - Remover um pedido');
     console.log('9 - Sair do sistema');
-    let escolha = Number(prompt('O que você deseja fazer? '));
+    escolha = Number(prompt('O que você deseja fazer? '));
     switch (escolha) {
         case 1:
             (0, clientes_1.cadastrarCliente)();
@@ -29,18 +30,23 @@ do {
             (0, produtos_1.cadastrarProduto)();
             break;
         case 4:
-            console.log('Seus carros são');
+            console.log('Seus produtos são:');
             console.log((0, produtos_1.listarProduto)());
             break;
         case 5:
             (0, produtos_1.removerProduto)();
             break;
         case 6:
-            pedidos_1.criarPedido;
+            (0, pedidos_1.iniciarCriacaoPedido)();
             break;
         case 7:
-            produtos_1.buscarProdutoPeloNome;
-            console.log('Digite nome do produto!');
+            (0, pedidos_1.gerenciarVerPedidos)();
+            const pedidosAtuais = (0, pedidos_1.verPedidos)();
+            console.log('📋 Lista de Pedidos:', JSON.stringify(pedidosAtuais, null, 2));
+            break;
+        case 8:
+            (0, pedidos_1.removerPedido)();
+            break;
         case 9:
             console.log("Você escolheu sair do sistema");
             break;

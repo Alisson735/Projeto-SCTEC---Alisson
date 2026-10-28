@@ -1,16 +1,9 @@
 import type { produto } from "./types";
 import promptSync = require('prompt-sync');
 const prompt = promptSync({ sigint: true });
-import { validaTexto } from "./relatorios";
 
 
-
-
-
-
-
-
-const produtos : produto[] = [
+export const produtos : produto[] = [
     {
         nome: 'Mouse Gamer blueDragon',
         quantidade: 22,
@@ -71,16 +64,38 @@ function cadastrarProduto() {
         nome: nomeDoProdutoInput,
         idProduto: idDoProdutoInput,
         quantidade: quantidadeDoProdutoInput,
-       preco: precoDoProdutoInput,
+       preco: precoDoProdutoInput,  
+       
     }
 
-    adicionarProduto(novoProduto);
+
+adicionarProduto(novoProduto);
 }
 
-function adicionarProduto(produto: produto): boolean {
-    if (!validaTexto(produto.nome) || !validaTexto(produto.nome)) {
-        return false
+function buscarProdutoPeloNome(nome: string): produto[] {
+    return produtos.filter((p: produto) => {
+        return p.nome.toLowerCase().includes(nome.toLowerCase());
+    });
+}
+
+
+    function iniciarBuscaProduto(): void {
+    const nomeBusca = prompt('Digite o nome do produto: ');
+    const resultados = buscarProdutoPeloNome(nomeBusca); // Chama a função de cima
+
+    if (resultados.length === 0) {
+        console.log('❌ Nenhum produto encontrado com esse nome.');
+    } else {
+        console.log('📦 Produtos encontrados:', resultados);
     }
+}
+
+
+  
+
+
+function adicionarProduto(produto: produto): boolean {
+    
   
 
     produtos.push(produto);
@@ -91,15 +106,9 @@ function adicionarProduto(produto: produto): boolean {
 }
 
 
-function buscarProdutoPeloNome(nome: string) {
-  return produtos.filter((prod) => {
-    return prod.nome.toLowerCase().includes(nome.toLowerCase());
-  });
-}
-
 function removerProduto(): void {
     const idInput: number = Number(prompt('Digite o id do qual você deseja excluir'));
-    const produtoIndex = produtos.findIndex((produto) => produto.idProduto === idInput);
+    const produtoIndex = produtos.findIndex((produto: produto) => produto.idProduto === idInput);
     produtos.splice(produtoIndex);
     console.log('Produto removido com sucesso');
 }
@@ -119,5 +128,6 @@ export {
     listarProduto,
     buscarProdutoPeloNome,
     buscarProdutoPeloPreco,
-    removerProduto
+    removerProduto,
+    iniciarBuscaProduto
 }

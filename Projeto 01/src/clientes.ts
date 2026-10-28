@@ -2,7 +2,23 @@ import type { cliente } from './types'
 import promptSync = require('prompt-sync');
 const prompt = promptSync({ sigint: true });
 
-const clientes: cliente[] = [];
+const clientes: cliente[] = [
+    {
+        nome: 'João da Silva',
+        email: 'Joao@gmail.com',
+        id: 1
+    },
+    {
+        nome: 'Gabriel dos Santos',
+        email: 'Gabriel@gmail.com',
+        id: 2
+    },
+    {
+        nome: 'Fernando Nogueira',
+        email: 'Fernando@gmail.com',
+        id: 3
+    }
+];
 
 
 function cadastrarCliente(): void {
